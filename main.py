@@ -8,18 +8,6 @@ import requests
 access = "jgVnCHnkE62e0xmiyDcUZTPqxl6l9kB0tguxlMc5"
 secret = "HIFY6SS2MxWePw2lP1WnYNM4bsNJVuUyeMX4FUEQ"
 
-with open('config.yaml', encoding='UTF-8') as f:
-    _cfg = yaml.load(f, Loader=yaml.FullLoader)
-DISCORD_WEBHOOK_URL = _cfg['DISCORD_WEBHOOK_URL']
-URL_BASE = _cfg['URL_BASE']
-
-def send_message(msg):
-    """디스코드 메세지 전송"""
-    now = datetime.datetime.now()
-    message = {"content": f"[{now.strftime('%Y-%m-%d %H:%M:%S')}] {str(msg)}"}
-    requests.post(DISCORD_WEBHOOK_URL, data=message)
-    print(message)
-
 def get_target_price(ticker, k):
     """변동성 돌파 전략으로 매수 목표가 조회"""
     df = pyupbit.get_ohlcv(ticker, interval="day", count=2)
